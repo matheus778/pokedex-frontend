@@ -69,7 +69,8 @@ main{
   cursor: pointer;
 }
 
-textarea{
+.info-card{
+  background-color: white;
   height: 80px;
   resize: none;
   width: 290px;

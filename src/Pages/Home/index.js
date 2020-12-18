@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './style.css';
 import {FiPlus, FiX} from 'react-icons/fi';
 import {Link} from 'react-router-dom';
+import api from '../../Services/api';
 
 export default function Home() {
+  const [pokemons, setPokemons] = useState([]);
+
+  useEffect(()=>{
+    async function buscarPokemons() {
+      const response = await api.get('/pokemons');
+      setPokemons(response.data)
+    }
+    buscarPokemons();
+  },[])
+
   return(
     <div className="container">
       <nav className="navbar">
@@ -11,23 +22,29 @@ export default function Home() {
       </nav>
 
       <main>
-          <div className="card">
+        {pokemons.map(poke => (
+            <div className="card">
             <div className="card-title">
               <FiX color="red" className="close-button" size={32}/>
-              <h1>pokemon</h1>
+              <h1>{poke.nome}</h1>
             </div>
 
             <div className="card-image">
-              <img src="https://images-americanas.b2w.io/produtos/01/00/img/1511899/3/1511899345_1SZ.jpg"></img>
+              <img alt="imagem" src={poke.imagem}></img>
             </div>
 
             <div>
-              <textarea readOnly={true}>
-                tipo
-                descrição
-              </textarea>
+              
+              <div class="info-card">
+                tipo:{poke.tipo}
+                <br/>
+                descrição:{poke.descricao}
+              </div>
+              
             </div>
           </div>  
+        ))}
+          
       </main>
 
       <Link to="/AddPokemon">
