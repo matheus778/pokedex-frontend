@@ -15,6 +15,9 @@ export default function Home() {
     buscarPokemons();
   },[])
 
+  function apagarPokemon(id) {
+    api.delete(`pokemons/${id}`);
+  }
   return(
     <div className="container">
       <nav className="navbar">
@@ -25,8 +28,12 @@ export default function Home() {
         {pokemons.map(poke => (
             <div className="card">
             <div className="card-title">
-              <FiX color="red" className="close-button" size={32}/>
-              <h1>{poke.nome}</h1>
+              {/* <FiX key={poke.id} color="red" className="close-button" size={32}
+              onClick={apagarPokemon(poke.id)}/> */}
+                <a onClick={()=>apagarPokemon(poke.id)}>
+                  <FiX color="red" className="close-button" size={32}/> 
+                </a>
+                <h1>{poke.nome}</h1>
             </div>
 
             <div className="card-image">
@@ -35,12 +42,12 @@ export default function Home() {
 
             <div>
               
-              <div class="info-card">
+              <div className="info-card">
                 tipo:{poke.tipo}
                 <br/>
                 descrição:{poke.descricao}
               </div>
-              
+
             </div>
           </div>  
         ))}
