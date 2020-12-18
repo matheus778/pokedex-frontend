@@ -1,6 +1,6 @@
 ## Aplicação web desenvolvida em React JS
 ------------
-### Tecnologias usadas :tw-1f528:
+### Tecnologias usadas :hammer:
 - React js
 - Axios
 - react-router-dom
