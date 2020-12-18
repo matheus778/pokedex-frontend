@@ -1,5 +1,7 @@
 import React from 'react';
-import './style.css'
+import './style.css';
+import {FiPlus, FiX} from 'react-icons/fi';
+import {Link} from 'react-router-dom';
 
 export default function Home() {
   return(
@@ -10,8 +12,8 @@ export default function Home() {
 
       <main>
           <div className="card">
-
             <div className="card-title">
+              <FiX color="red" className="close-button" size={32}/>
               <h1>pokemon</h1>
             </div>
 
@@ -20,12 +22,19 @@ export default function Home() {
             </div>
 
             <div>
-              <h3>tipo</h3>
-              <h3>descrição</h3>
+              <textarea readOnly={true}>
+                tipo
+                descrição
+              </textarea>
             </div>
-          </div>
-          
+          </div>  
       </main>
+
+      <Link to="/AddPokemon">
+        <div className="float-button">
+            <FiPlus size={38}/>
+        </div>
+      </Link>
     </div>
   )
 }
