@@ -7,16 +7,16 @@ import api from '../../Services/api';
 export default function Home() {
   const [pokemons, setPokemons] = useState([]);
 
-  useEffect(()=>{
-    async function buscarPokemons() {
-      const response = await api.get('/pokemons');
-      setPokemons(response.data)
-    }
-    buscarPokemons();
-  },[])
+  async function buscarPokemons() {
+    const response = await api.get('/pokemons');
+    setPokemons(response.data)
+  }
+  
+  useEffect(()=>buscarPokemons(),[pokemons])
 
   function apagarPokemon(id) {
     api.delete(`pokemons/${id}`);
+    buscarPokemons();
   }
   return(
     <div className="container">
@@ -30,9 +30,9 @@ export default function Home() {
             <div className="card-title">
               {/* <FiX key={poke.id} color="red" className="close-button" size={32}
               onClick={apagarPokemon(poke.id)}/> */}
-                <a onClick={()=>apagarPokemon(poke.id)}>
-                  <FiX color="red" className="close-button" size={32}/> 
-                </a>
+                  <div onClick={()=>apagarPokemon(poke.id)}>
+                    <FiX color="red" className="close-button" size={32}/> 
+                  </div>
                 <h1>{poke.nome}</h1>
             </div>
 
